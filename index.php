@@ -17,8 +17,7 @@ $password = 'yassir';
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="./assets/gorent.svg">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <script src="./scripts/script.js" defer></script>
 
 </head>
 
