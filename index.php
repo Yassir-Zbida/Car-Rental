@@ -156,7 +156,6 @@
                             <p class="text-sm text-red-500">-1.2 from last month</p>
                         </div>
                         <i class="ri-group-3-line text-3xl text-orange-600"></i>
-                        <!-- <i class="ri-arrow-down-line "></i> -->
                     </div>
                 </div>
 

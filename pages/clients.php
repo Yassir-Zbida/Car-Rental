@@ -94,15 +94,15 @@ $password = 'yassir';
             <!-- Header Options section-->
             <div class="bg-white flex items-center justify-between w-full  p-4 shadow rounded-md mb-4">
                 <div class="w-full flex items-center justify-between space-x-4">
-                    <!-- Search -->
+
                     <div class="relative">
                         <input type="text" placeholder="Search for clients..."
                             class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-orange-200 text-sm text-gray-600" />
                         <i class="ri-search-line absolute left-3 top-2 text-gray-400"></i>
                     </div>
-                    <!-- Add Client -->
+
                     <button
-                        class="flex items-center bg-orange-600 hover:bg-transparent hover:text-orange-600 text-white px-4 py-2 rounded-lg shadow text-sm font-medium">
+                        class="flex items-center bg-orange-600 hover:bg-transparent hover:text-orange-600 text-white px-4 py-2 rounded-lg shadow text-sm font-medium" id="addClientBtn">
                         <i class="ri-user-add-line text-lg mr-2"></i> Add Client
                     </button>
                 </div>
@@ -184,7 +184,63 @@ $password = 'yassir';
             </div>
         </section>
     </div>
+    <!-- add new client modal -->
+    <div id="addClient" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
 
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl  font-semibold text-orange-600">Add New Client</h3>
+                <button class="text-gray-500 hover:text-gray-700 closeAddClient"><i
+                        class="ri-close-circle-line text-2xl text-orange-600"></i></button>
+            </div>
+
+            <form>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+
+                    <div>
+                        <label for="first-name" class="mb-2 block text-sm font-medium text-gray-700">First Name</label>
+                        <input placeholder="Enter your first name" type="text" id="first-name" name="first-name"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div>
+                        <label for="last-name" class="mb-2 block text-sm font-medium text-gray-700">Last Name</label>
+                        <input placeholder="Enter your last name" type="text" id="last-name" name="last-name"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div>
+                        <label for="email" class="mb-2 block text-sm font-medium text-gray-700">Email</label>
+                        <input placeholder="Enter your email address" type="email" id="email" name="email"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div>
+                        <label for="phone" class="mb-2 block text-sm font-medium text-gray-700">Phone</label>
+                        <input placeholder="Enter your phone number" type="text" id="phone" name="phone"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <label for="address" class="mb-2 block text-sm font-medium text-gray-700">Address</label>
+                    <textarea placeholder="Enter your message" id="address" name="address" rows="3"
+                        class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                        required></textarea>
+                </div>
+
+                <div class="mt-6 flex justify-end space-x-2">
+                    <button type="button"
+                        class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 closeAddClient">Cancel</button>
+                    <button type="submit"
+                        class="px-8 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">Save</button>
+                </div>
+            </form>
+        </div>
 </body>
 
 </html>
