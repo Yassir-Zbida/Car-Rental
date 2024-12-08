@@ -17,7 +17,7 @@ $password = 'yassir';
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../assets/gorent.svg">
-    <script src="../scripts/script.js" defer></script>
+    <script src="../scripts/cars.js" defer></script>
 
 </head>
 
@@ -102,7 +102,7 @@ $password = 'yassir';
                     </div>
                     <!-- Add Car -->
                     <button
-                        class="flex items-center bg-orange-600 hover:bg-transparent hover:text-orange-600 text-white px-4 py-2 rounded-lg shadow text-sm font-medium">
+                        class="flex items-center bg-orange-600 hover:bg-transparent hover:text-orange-600 text-white px-4 py-2 rounded-lg shadow text-sm font-medium" id="addCarBtn">
                         <i class="ri-add-box-line text-lg mr-2"></i> Add Car
                     </button>
                 </div>
@@ -194,6 +194,67 @@ $password = 'yassir';
                 </div>
             </div>
         </section>
+    </div>
+
+        <!-- Add new car modal  -->
+
+        <div id="addCarModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
+
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl  font-semibold text-orange-600">Add New Car</h3>
+                <button class="text-gray-500 hover:text-gray-700 closeAddCar"><i
+                        class="ri-close-circle-line text-2xl text-orange-600"></i></button>
+            </div>
+
+            <form>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+
+                    <div class="col-span-2">
+                        <label for="Car Number" class="mb-2 block text-sm font-medium text-gray-700">Car Number</label>
+                        <input placeholder="Enter car Number" type="text" id="carNumber" name="car-number"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div class="col">
+                        <label for="Brand Name" class="mb-2 block text-sm font-medium text-gray-700">Brand Name</label>
+                        <input placeholder="Enter car brand name" type="text" id="brandName" name="brand-name"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div>
+                        <label for="Model" class="mb-2 block text-sm font-medium text-gray-700">Model</label>
+                        <input placeholder="Enter model name" type="text" id="model" name="model"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div>
+                        <label for="Price/Day" class="mb-2 block text-sm font-medium text-gray-700">Price/Day</label>
+                        <input placeholder="Enter price amount per 1 day" type="text" id="priceDay	" name="Price/Day"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div>
+                        <label for="year" class="mb-2 block text-sm font-medium text-gray-700">Year</label>
+                        <input placeholder="Enter modal year" type="text" id="year" name="year"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+                </div>
+
+
+                <div class="mt-6 flex justify-end space-x-2">
+                    <button type="button"
+                        class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 closeAddCar">Cancel</button>
+                    <button type="submit"
+                        class="px-8 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
 
 </body>
