@@ -35,6 +35,21 @@ closeAddCar.forEach(button => {
  const addCarBtn = document.getElementById('addCarBtn');
  addCarBtn.addEventListener('click', () => {
    console.log('ffffff');
-   
    addCarModal.classList.remove('hidden');
 });
+
+// add new contrat modal 
+const addContratBtn = document.getElementById('addContratBtn');
+const addContratModal = document.getElementById('addContratModal')
+addContratBtn.addEventListener('click', () => {
+  console.log('ffffff');
+  addContratModal.classList.remove('hidden');
+});
+
+// close add new contrat modal
+const closeAddContrat = document.querySelectorAll('.closeAddContrat');
+closeAddContrat.forEach(button => {
+   button.addEventListener('click', () => {
+      addContratModal.classList.add('hidden');
+   });
+ });
