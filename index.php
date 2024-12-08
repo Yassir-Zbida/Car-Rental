@@ -3,17 +3,16 @@
  $dbname = 'locationvoitures';  
  $username = 'root';     
  $password = 'yassir';          
- 
- try {
-     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-     echo "Worked";
- } catch (PDOException $e) {
-     echo "Erreur de connexion : " . $e->getMessage();
- }
- ?>
 
+ $conn = new mysqli($host, $username, $password, $dbname);
 
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$conn-> close();
+
+?>
 <!-- Html Page Struct -->
 <html>
 

@@ -1,9 +1,18 @@
 <!-- Database Connection -->
 <?php
-$host = 'localhost'; 
-$dbname = 'locationvoitures'; 
-$user = 'root'; 
-$password = 'yassir'; 
+ $host = 'localhost';     
+ $dbname = 'locationvoitures';  
+ $username = 'root';     
+ $password = 'yassir';          
+
+ $conn = new mysqli($host, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$conn-> close();
+
 ?>
 
 <!-- Html Page Struct -->
@@ -17,7 +26,7 @@ $password = 'yassir';
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../assets/gorent.svg">
-    <script src="../scripts/script.js" defer></script>
+    <script src="../scripts/contrats.js" defer></script>
 
 </head>
 
@@ -102,7 +111,8 @@ $password = 'yassir';
                     </div>
                     <!-- Add Car -->
                     <button
-                        class="transition duration-200flex items-center bg-orange-600 hover:bg-transparent hover:text-orange-600 text-white px-4 py-2 rounded-lg shadow text-sm font-medium">
+                        class="transition duration-200flex items-center bg-orange-600 hover:bg-transparent hover:text-orange-600 text-white px-4 py-2 rounded-lg shadow text-sm font-medium"
+                        id="addContratBtn">
                         <i class="ri-sticky-note-add-line text-lg mr-2"></i> Add Contrat
                     </button>
                 </div>
@@ -114,7 +124,7 @@ $password = 'yassir';
                     <h4 class="text-lg font-bold mb-4">Go Rent Contrats</h4>
                     <div class="overflow-x-auto bg-white shadow rounded-lg">
                         <table class="border w-full border-collapse text-sm text-gray-600">
-                            
+
                             <thead>
                                 <tr class="bg-gray-100 text-left">
                                     <th class="py-2 px-4 border-b">ID</th>
@@ -193,6 +203,65 @@ $password = 'yassir';
                 </div>
             </div>
         </section>
+    </div>
+
+    <!-- Add New contrat modal  -->
+
+    <div id="addContratModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
+
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl  font-semibold text-orange-600">Add New Contrat</h3>
+                <button class="text-gray-500 hover:text-gray-700 closeAddContrat"><i
+                        class="ri-close-circle-line text-2xl text-orange-600"></i></button>
+            </div>
+
+            <form>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="client-id" class="mb-2 block text-sm font-medium text-gray-700">Client ID</label>
+                        <input placeholder="Enter client id" type="text" id="client-id" name="client-id"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div>
+                        <label for="car-id" class="mb-2 block text-sm font-medium text-gray-700">Car ID</label>
+                        <input placeholder="Enter car id" type="text" id="car-id" name="car-id"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div>
+                        <label for="start-date" class="mb-2 block text-sm font-medium text-gray-700">Start Date</label>
+                        <input placeholder="Enter rent start date" type="date" id="start-date" name="start-date"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div>
+                        <label for="end-date" class="mb-2 block text-sm font-medium text-gray-700">End Date</label>
+                        <input placeholder="Enter rent end date" type="date" id="end-date" name="end-date"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div class="col-span-2">
+                        <label for="total" class="mb-2 block text-sm font-medium text-gray-700">Total</label>
+                        <input placeholder="Enter total price" type="number" id="total" name="total"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end space-x-2">
+                    <button type="button"
+                        class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 closeAddContrat">Cancel</button>
+                    <button type="submit"
+                        class="px-8 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
 
 </body>
