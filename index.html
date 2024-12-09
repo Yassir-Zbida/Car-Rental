@@ -1,9 +1,9 @@
 <?php
 // Database Connection
-$host = 'localhost';
-$dbname = 'gorent';
-$username = 'root';
-$password = 'yassir';
+$host = 'localhost';     
+$dbname = 'gorent';  
+$username = 'root';     
+$password = 'yassir';          
 
 $conn = new mysqli($host, $username, $password, $dbname);
 
@@ -11,6 +11,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Close the connection after the query has been executed
+// $conn->close(); // Keep this for later if needed
 
 ?>
 
@@ -138,29 +140,18 @@ if ($conn->connect_error) {
                             </thead>
 
                             <tbody>
-                            <?php
-$servername = "localhost";
-$username = "root";
-$password = "yassir";
-$dbname = "gorent"; 
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+                                <?php
+// SQL query to fetch contract data
 $sql = "
     SELECT 
         contracts.ID,
         CONCAT(clients.`First Name`, ' ', clients.`Last Name`) AS ClientName,
-        CONCAT(cars.Brand, ' ', cars.Model) AS Car_Name,  
+        contracts.Car_ID,
         contracts.Start_Date,
         contracts.End_Date,
         contracts.Total
     FROM contracts
-    JOIN clients ON contracts.Client_ID = clients.ID
-    JOIN cars ON contracts.Car_ID = cars.ID; -- Fixed JOIN condition
+    JOIN clients ON contracts.Client_ID = clients.ID;
 ";
 
 $result = $conn->query($sql);
@@ -174,7 +165,7 @@ while ($row = $result->fetch_assoc()) {
     <tr class="hover:bg-gray-50">
         <td class="py-3 px-4 border-b">' . $row["ID"] . '</td>
         <td class="py-3 px-4 border-b">' . $row["ClientName"] . '</td> <!-- Client name -->
-        <td class="py-3 px-4 border-b">' . $row["Car_Name"] . '</td> <!-- Car brand and model -->
+        <td class="py-3 px-4 border-b">' . $row["Car_ID"] . '</td>
         <td class="py-3 px-4 border-b">' . $row["Start_Date"] . '</td>
         <td class="py-3 px-4 border-b">' . $row["End_Date"] . '</td>
         <td class="py-3 px-4 border-b">' . $row["Total"] . '</td>
@@ -192,8 +183,9 @@ while ($row = $result->fetch_assoc()) {
     </tr>';
 }
 
+// Close connection if it's no longer needed
+$conn->close();
 ?>
-
                             </tbody>
                         </table>
                     </div>
@@ -208,54 +200,57 @@ while ($row = $result->fetch_assoc()) {
         <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
 
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl  font-semibold text-orange-600">Add New Contrat</h3>
-                <button class="text-gray-500 hover:text-gray-700 closeAddContrat"><i
-                        class="ri-close-circle-line text-2xl text-orange-600"></i></button>
+                <h3 class="text-xl  font-semibold text-orange-600">Add New Contract</h3>
+                <button id="closeAddContratModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
             </div>
 
-            <form>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="client-id" class="mb-2 block text-sm font-medium text-gray-700">Client ID</label>
-                        <input placeholder="Enter client id" type="text" id="client-id" name="client-id"
-                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
-                            required />
+            <form id="addContratForm" method="POST" action="">
+
+                <div class="space-y-4">
+                    <div class="flex space-x-4">
+                        <div class="w-1/2">
+                            <label for="client" class="block text-sm font-medium text-gray-600">Client</label>
+                            <select name="client" id="client" class="w-full border-gray-300 rounded-md p-2">
+                                <option value="Client1">Client1</option>
+                                <option value="Client2">Client2</option>
+                                <option value="Client3">Client3</option>
+                            </select>
+                        </div>
+                        <div class="w-1/2">
+                            <label for="car" class="block text-sm font-medium text-gray-600">Car</label>
+                            <select name="car" id="car" class="w-full border-gray-300 rounded-md p-2">
+                                <option value="Car1">Car1</option>
+                                <option value="Car2">Car2</option>
+                                <option value="Car3">Car3</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div>
-                        <label for="car-id" class="mb-2 block text-sm font-medium text-gray-700">Car ID</label>
-                        <input placeholder="Enter car id" type="text" id="car-id" name="car-id"
-                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
-                            required />
+                        <label for="start_date" class="block text-sm font-medium text-gray-600">Start Date</label>
+                        <input type="date" name="start_date" id="start_date"
+                            class="w-full border-gray-300 rounded-md p-2" required>
                     </div>
 
                     <div>
-                        <label for="start-date" class="mb-2 block text-sm font-medium text-gray-700">Start Date</label>
-                        <input placeholder="Enter rent start date" type="date" id="start-date" name="start-date"
-                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
-                            required />
+                        <label for="end_date" class="block text-sm font-medium text-gray-600">End Date</label>
+                        <input type="date" name="end_date" id="end_date" class="w-full border-gray-300 rounded-md p-2"
+                            required>
                     </div>
 
                     <div>
-                        <label for="end-date" class="mb-2 block text-sm font-medium text-gray-700">End Date</label>
-                        <input placeholder="Enter rent end date" type="date" id="end-date" name="end-date"
-                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
-                            required />
-                    </div>
-
-                    <div class="col-span-2">
-                        <label for="total" class="mb-2 block text-sm font-medium text-gray-700">Total</label>
-                        <input placeholder="Enter total price" type="number" id="total" name="total"
-                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
-                            required />
+                        <label for="total" class="block text-sm font-medium text-gray-600">Total</label>
+                        <input type="number" name="total" id="total" class="w-full border-gray-300 rounded-md p-2"
+                            required>
                     </div>
                 </div>
 
-                <div class="mt-6 flex justify-end space-x-2">
-                    <button type="button"
-                        class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 closeAddContrat">Cancel</button>
-                    <button type="submit"
-                        class="px-8 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">Save</button>
+                <div class="mt-6 flex justify-between">
+                    <button type="button" id="closeAddContratModalBtn"
+                        class="text-sm px-4 py-2 bg-gray-300 text-gray-700 rounded-md">Cancel</button>
+                    <button type="submit" class="text-sm px-4 py-2 bg-orange-600 text-white rounded-md">Save</button>
                 </div>
             </form>
         </div>
