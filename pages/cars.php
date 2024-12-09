@@ -1,20 +1,3 @@
-<!-- Database Connection -->
-<?php
- $host = 'localhost';     
- $dbname = 'locationvoitures';  
- $username = 'root';     
- $password = 'yassir';          
-
- $conn = new mysqli($host, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$conn-> close();
-
-?>
-
 <!-- Html Page Struct -->
 <html>
 
@@ -157,44 +140,7 @@ $conn-> close();
                                             </button>
                                         </td>
                                     </tr>
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="py-3 px-4 border-b">2</td>
-                                        <td class="py-3 px-4 border-b">Honda</td>
-                                        <td class="py-3 px-4 border-b">Civic</td>
-                                        <td class="py-3 px-4 border-b">2020</td>
-                                        <td class="py-3 px-4 border-b">$25</td>
-                                        <td class="py-3 px-4 border-b">
-                                            <span
-                                                class="bg-red-100 text-red-600 py-1 px-3 rounded-full">Unavailable</span>
-                                        </td>
-                                        <td class="py-3 px-4 border-b text-center space-x-2">
-                                            <button class="text-blue-500 hover:text-blue-600">
-                                                <i class="ri-edit-line text-lg"></i>
-                                            </button>
-                                            <button class="text-red-500 hover:text-red-600">
-                                                <i class="ri-delete-bin-line text-lg"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="py-3 px-4 border-b">3</td>
-                                        <td class="py-3 px-4 border-b">Ford</td>
-                                        <td class="py-3 px-4 border-b">Mustang</td>
-                                        <td class="py-3 px-4 border-b">2021</td>
-                                        <td class="py-3 px-4 border-b">$50</td>
-                                        <td class="py-3 px-4 border-b">
-                                            <span
-                                                class="bg-green-100 text-green-600 py-1 px-3 rounded-full">Available</span>
-                                        </td>
-                                        <td class="py-3 px-4 border-b text-center space-x-2">
-                                            <button class="text-blue-500 hover:text-blue-600">
-                                                <i class="ri-edit-line text-lg"></i>
-                                            </button>
-                                            <button class="text-red-500 hover:text-red-600">
-                                                <i class="ri-delete-bin-line text-lg"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
+                        
                                 </tbody>
                             </table>
                         </div>

@@ -1,20 +1,3 @@
-<!-- Database Connection -->
-<?php
- $host = 'localhost';     
- $dbname = 'locationvoitures';  
- $username = 'root';     
- $password = 'yassir';          
-
- $conn = new mysqli($host, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$conn-> close();
-
-?>
-
 <!-- Html Page Struct -->
 <html>
 
@@ -124,67 +107,59 @@ $conn-> close();
                     <div class="rounded-lg overflow-x-auto">
                         <table class="border w-full border-collapse text-sm text-gray-600">
                             <!-- Table Head -->
-                            <thead>
-                              <tr class="bg-gray-100 text-left">
-                                <th class="py-2 px-4 border-b">ID</th>
-                                <th class="py-2 px-4 border-b">First Name</th>
-                                <th class="py-2 px-4 border-b">Last Name</th>
-                                <th class="py-2 px-4 border-b">Email</th>
-                                <th class="py-2 px-4 border-b">Phone</th>
-                                <th class="py-2 px-4 border-b">Address</th>
-                                <th class="py-2 px-4 border-b text-center">Actions</th>
-                              </tr>
-                            </thead>
+                           
+                               <thead>
+                               <tr class="bg-gray-100 text-left">
+                                 <th class="py-2 px-4 border-b">ID</th>
+                                 <th class="py-2 px-4 border-b">First Name</th>
+                                 <th class="py-2 px-4 border-b">Last Name</th>
+                                 <th class="py-2 px-4 border-b">Email</th>
+                                 <th class="py-2 px-4 border-b">Phone</th>
+                                 <th class="py-2 px-4 border-b">Address</th>
+                                 <th class="py-2 px-4 border-b text-center">Actions</th>
+                               </tr>
+                             </thead>
+                            
                             <!-- Table Body -->
                             <tbody>
-                              <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-4 border-b">1</td>
-                                <td class="py-3 px-4 border-b">John</td>
-                                <td class="py-3 px-4 border-b">Doe</td>
-                                <td class="py-3 px-4 border-b">johndoe@example.com</td>
-                                <td class="py-3 px-4 border-b">123-456-7890</td>
-                                <td class="py-3 px-4 border-b">123 Elm Street</td>
-                                <td class="py-3 px-4 border-b text-center space-x-2">
-                                  <button class="text-blue-500 hover:text-blue-600">
-                                    <i class="ri-edit-line text-lg"></i>
-                                  </button>
-                                  <button class="text-red-500 hover:text-red-600">
-                                    <i class="ri-delete-bin-line text-lg"></i>
-                                  </button>
-                                </td>
-                              </tr>
-                              <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-4 border-b">2</td>
-                                <td class="py-3 px-4 border-b">Jane</td>
-                                <td class="py-3 px-4 border-b">Smith</td>
-                                <td class="py-3 px-4 border-b">janesmith@example.com</td>
-                                <td class="py-3 px-4 border-b">987-654-3210</td>
-                                <td class="py-3 px-4 border-b">456 Maple Avenue</td>
-                                <td class="py-3 px-4 border-b text-center space-x-2">
-                                  <button class="text-blue-500 hover:text-blue-600">
-                                    <i class="ri-edit-line text-lg"></i>
-                                  </button>
-                                  <button class="text-red-500 hover:text-red-600">
-                                    <i class="ri-delete-bin-line text-lg"></i>
-                                  </button>
-                                </td>
-                              </tr>
-                              <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-4 border-b">3</td>
-                                <td class="py-3 px-4 border-b">Alice</td>
-                                <td class="py-3 px-4 border-b">Johnson</td>
-                                <td class="py-3 px-4 border-b">alicejohnson@example.com</td>
-                                <td class="py-3 px-4 border-b">555-678-1234</td>
-                                <td class="py-3 px-4 border-b">789 Oak Lane</td>
-                                <td class="py-3 px-4 border-b text-center space-x-2">
-                                  <button class="text-blue-500 hover:text-blue-600">
-                                    <i class="ri-edit-line text-lg"></i>
-                                  </button>
-                                  <button class="text-red-500 hover:text-red-600">
-                                    <i class="ri-delete-bin-line text-lg"></i>
-                                  </button>
-                                </td>
-                              </tr>
+                              <?php
+                                 $host = 'localhost';     
+                                 $dbname = 'gorent';  
+                                 $username = 'root';     
+                                 $password = 'yassir'; 
+
+                                 $connection = new mysqli($host, $username, $password, $dbname);
+                                 if ($connection->connect_error) {
+                                    die("Connection failed: " . $connection->connect_error);
+                                }
+
+                                $sql = "SELECT * FROM clients";
+                                $result = $connection->query($sql);
+                                if(!$result){
+                                    die("invalid query:".$connection->error);
+                                }
+                                while($row = $result->fetch_assoc()){
+                                    echo'
+                                    <tr class="hover:bg-gray-50">
+                                       <td class="py-3 px-4 border-b">'. $row["id"] .'</td>
+                                       <td class="py-3 px-4 border-b">'. $row["First Name"] .'</td>
+                                       <td class="py-3 px-4 border-b">'. $row["Last Name"] .'</td>
+                                       <td class="py-3 px-4 border-b">'. $row["Email"] .'</td>
+                                       <td class="py-3 px-4 border-b">'. $row["Phone"] .'</td>
+                                       <td class="py-3 px-4 border-b">'. $row["Address"] .'</td>
+                                       <td class="py-3 px-4 border-b text-center space-x-2">
+                                       <button class="text-blue-500 hover:text-blue-600">
+                                        <i class="ri-edit-line text-lg"></i>
+                                       </button>
+                                       <button class="text-red-500 hover:text-red-600">
+                                        <i class="ri-delete-bin-line text-lg"></i>
+                                       </button>
+                                    </td>
+                                   </tr>
+                                    ';
+                                }
+                                 
+                              ?>
                             </tbody>
                           </table>
                           

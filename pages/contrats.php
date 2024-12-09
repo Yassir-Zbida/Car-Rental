@@ -1,7 +1,7 @@
 <!-- Database Connection -->
 <?php
  $host = 'localhost';     
- $dbname = 'locationvoitures';  
+ $dbname = 'gorent';  
  $username = 'root';     
  $password = 'yassir';          
 
