@@ -121,12 +121,31 @@
                                 </thead>
                                 <!-- Table Body -->
                                 <tbody>
+                                  
+                                <?php
+                                 $host = 'localhost';     
+                                 $dbname = 'gorent';  
+                                 $username = 'root';     
+                                 $password = 'yassir'; 
+
+                                 $connection = new mysqli($host, $username, $password, $dbname);
+                                 if ($connection->connect_error) {
+                                    die("Connection failed: " . $connection->connect_error);
+                                }
+
+                                $sql = "SELECT * FROM cars";
+                                $result = $connection->query($sql);
+                                if(!$result){
+                                    die("invalid query:".$connection->error);
+                                }
+                                while($row = $result->fetch_assoc()){
+                                    echo'
                                     <tr class="hover:bg-gray-50">
-                                        <td class="py-3 px-4 border-b">1</td>
-                                        <td class="py-3 px-4 border-b">Toyota</td>
-                                        <td class="py-3 px-4 border-b">Corolla</td>
-                                        <td class="py-3 px-4 border-b">2023</td>
-                                        <td class="py-3 px-4 border-b">$30</td>
+                                        <td class="py-3 px-4 border-b">'. $row["ID"] .'</td>
+                                        <td class="py-3 px-4 border-b">'. $row["Brand"] .'</td>
+                                        <td class="py-3 px-4 border-b">'. $row["Model"] .'</td>
+                                        <td class="py-3 px-4 border-b">'. $row["Year"] .'</td>
+                                        <td class="py-3 px-4 border-b">'. $row["Price/Day"] .'</td>
                                         <td class="py-3 px-4 border-b">
                                             <span
                                                 class="bg-green-100 text-green-600 py-1 px-3 rounded-full">Available</span>
@@ -141,6 +160,10 @@
                                         </td>
                                     </tr>
                         
+                                    ';
+                                }      
+                              ?>
+
                                 </tbody>
                             </table>
                         </div>
