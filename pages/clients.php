@@ -142,8 +142,8 @@
                                     echo'
                                     <tr class="hover:bg-gray-50">
                                        <td class="py-3 px-4 border-b">'. $row["id"] .'</td>
-                                       <td class="py-3 px-4 border-b">'. $row["First Name"] .'</td>
-                                       <td class="py-3 px-4 border-b">'. $row["Last Name"] .'</td>
+                                       <td class="py-3 px-4 border-b">'. $row["First_Name"] .'</td>
+                                       <td class="py-3 px-4 border-b">'. $row["Last_Name"] .'</td>
                                        <td class="py-3 px-4 border-b">'. $row["Email"] .'</td>
                                        <td class="py-3 px-4 border-b">'. $row["Phone"] .'</td>
                                        <td class="py-3 px-4 border-b">'. $row["Address"] .'</td>
@@ -151,9 +151,9 @@
                                        <button class="text-blue-500 hover:text-blue-600">
                                         <i class="ri-edit-line text-lg"></i>
                                        </button>
-                                       <button class="text-red-500 hover:text-red-600">
-                                        <i class="ri-delete-bin-line text-lg"></i>
-                                       </button>
+                                       <a href="../phpFunction/deleteClient.php?id='.$row["id"].'" class="btn-delete">
+                                             <i class="ri-delete-bin-line text-lg text-red-500 hover:text-red-700"></i>
+                                       </a>
                                     </td>
                                    </tr>
                                     ';
@@ -178,7 +178,7 @@
                         class="ri-close-circle-line text-2xl text-orange-600"></i></button>
             </div>
 
-            <form>
+            <form action="../phpFunction/addClient.php" method="post">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
 
                     <div>
@@ -220,7 +220,7 @@
                 <div class="mt-6 flex justify-end space-x-2">
                     <button type="button"
                         class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 closeAddClient">Cancel</button>
-                    <button type="submit"
+                    <button type="submit" name="submit"
                         class="px-8 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">Save</button>
                 </div>
             </form>

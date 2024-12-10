@@ -153,14 +153,14 @@ if ($conn->connect_error) {
 $sql = "
     SELECT 
         contracts.ID,
-        CONCAT(clients.`First Name`, ' ', clients.`Last Name`) AS ClientName,
+        CONCAT(clients.`First_Name`, ' ', clients.`Last_Name`) AS ClientName,
         CONCAT(cars.Brand, ' ', cars.Model) AS Car_Name,  
         contracts.Start_Date,
         contracts.End_Date,
         contracts.Total
     FROM contracts
     JOIN clients ON contracts.Client_ID = clients.ID
-    JOIN cars ON contracts.Car_ID = cars.ID; -- Fixed JOIN condition
+    JOIN cars ON contracts.Car_ID = cars.ID;
 ";
 
 $result = $conn->query($sql);
@@ -173,8 +173,8 @@ while ($row = $result->fetch_assoc()) {
     echo '
     <tr class="hover:bg-gray-50">
         <td class="py-3 px-4 border-b">' . $row["ID"] . '</td>
-        <td class="py-3 px-4 border-b">' . $row["ClientName"] . '</td> <!-- Client name -->
-        <td class="py-3 px-4 border-b">' . $row["Car_Name"] . '</td> <!-- Car brand and model -->
+        <td class="py-3 px-4 border-b">' . $row["ClientName"] . '</td> 
+        <td class="py-3 px-4 border-b">' . $row["Car_Name"] . '</td> 
         <td class="py-3 px-4 border-b">' . $row["Start_Date"] . '</td>
         <td class="py-3 px-4 border-b">' . $row["End_Date"] . '</td>
         <td class="py-3 px-4 border-b">' . $row["Total"] . '</td>
@@ -184,10 +184,10 @@ while ($row = $result->fetch_assoc()) {
         <td class="py-3 px-4 border-b text-center space-x-2">
             <button class="text-blue-500 hover:text-blue-600">
                 <i class="ri-eye-line text-lg"></i>
-            </button>
-            <button class="text-red-500 hover:text-red-600">
-                <i class="ri-delete-bin-line text-lg"></i>
-            </button>
+            
+            <a href="../phpFunction/deleteContract.php?id='.$row["ID"].'" class="btn-delete">
+              <i class="ri-delete-bin-line text-lg text-red-500 hover:text-red-700"></i>
+            </a>
         </td>
     </tr>';
 }
