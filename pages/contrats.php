@@ -216,8 +216,8 @@ while ($row = $result->fetch_assoc()) {
             <form action="../phpFunction/addContract.php" method="post">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label for="client-id" class="mb-2 block text-sm font-medium text-gray-700" >Client ID</label> 
-                        <select class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500" name="id_client">
+                        <label for="clientId" class="mb-2 block text-sm font-medium text-gray-700" >Client ID</label> 
+                        <select class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500" name="clientId">
                         <option value="" disabled selected >Select a Client</option>
                         <?php
                          
@@ -230,13 +230,13 @@ while ($row = $result->fetch_assoc()) {
                     </div>
 
                     <div>
-                        <label for="car-id" class="mb-2 block text-sm font-medium text-gray-700">Car ID</label>
-                        <select id="voiture" name="id_voiture" class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500" required>
+                        <label for="carId" class="mb-2 block text-sm font-medium text-gray-700">Car ID</label>
+                        <select id="car" name="carId" class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500" required>
                             <option value="" disabled selected>Select a car </option>
                             <?php
-                                $voitures = $conn->query("SELECT ID, CONCAT(Brand, ' ', Model) AS cars FROM cars ");
-                                while ($voiture = $voitures->fetch_assoc()) {
-                                    echo "<option value='{$voiture['ID']}'>{$voiture['cars']}</option>";
+                                $cars = $conn->query("SELECT ID, CONCAT(Brand, ' ', Model) AS cars FROM cars ");
+                                while ($car = $cars->fetch_assoc()) {
+                                    echo "<option value='{$car['ID']}'>{$car['cars']}</option>";
                                 }
                             ?>
                         </select>
@@ -244,14 +244,14 @@ while ($row = $result->fetch_assoc()) {
 
                     <div>
                         <label for="start-date" class="mb-2 block text-sm font-medium text-gray-700">Start Date</label>
-                        <input placeholder="Enter rent start date" type="date" id="start-date" name="date_debut"
+                        <input placeholder="Enter rent start date" type="date" id="startDate" name="startDate"
                             class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
                             required />
                     </div>
 
                     <div>
                         <label for="end-date" class="mb-2 block text-sm font-medium text-gray-700">End Date</label>
-                        <input placeholder="Enter rent end date" type="date" id="end-date" name="date_fin"
+                        <input placeholder="Enter rent end date" type="date" id="endDate" name="endDate"
                             class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
                             required />
                     </div>
