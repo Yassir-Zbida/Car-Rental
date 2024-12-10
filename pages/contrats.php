@@ -213,32 +213,45 @@ while ($row = $result->fetch_assoc()) {
                         class="ri-close-circle-line text-2xl text-orange-600"></i></button>
             </div>
 
-            <form>
+            <form action="../phpFunction/addContract.php" method="post">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label for="client-id" class="mb-2 block text-sm font-medium text-gray-700">Client ID</label>
-                        <input placeholder="Enter client id" type="text" id="client-id" name="client-id"
-                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
-                            required />
+                        <label for="client-id" class="mb-2 block text-sm font-medium text-gray-700" >Client ID</label> 
+                        <select class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500" name="id_client">
+                        <option value="" disabled selected >Select a Client</option>
+                        <?php
+                         
+                            $clients = $conn->query("SELECT id, CONCAT(First_Name, ' ',Last_Name) AS Full_Name FROM clients");
+                            while ($client = $clients->fetch_assoc()) {
+                                echo "<option value='{$client['id']}'>{$client['Full_Name']}</option>";
+                            }
+                        ?>
+                        </select>
                     </div>
 
                     <div>
                         <label for="car-id" class="mb-2 block text-sm font-medium text-gray-700">Car ID</label>
-                        <input placeholder="Enter car id" type="text" id="car-id" name="car-id"
-                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
-                            required />
+                        <select id="voiture" name="id_voiture" class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500" required>
+                            <option value="" disabled selected>Select a car </option>
+                            <?php
+                                $voitures = $conn->query("SELECT ID, CONCAT(Brand, ' ', Model) AS cars FROM cars ");
+                                while ($voiture = $voitures->fetch_assoc()) {
+                                    echo "<option value='{$voiture['ID']}'>{$voiture['cars']}</option>";
+                                }
+                            ?>
+                        </select>
                     </div>
 
                     <div>
                         <label for="start-date" class="mb-2 block text-sm font-medium text-gray-700">Start Date</label>
-                        <input placeholder="Enter rent start date" type="date" id="start-date" name="start-date"
+                        <input placeholder="Enter rent start date" type="date" id="start-date" name="date_debut"
                             class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
                             required />
                     </div>
 
                     <div>
                         <label for="end-date" class="mb-2 block text-sm font-medium text-gray-700">End Date</label>
-                        <input placeholder="Enter rent end date" type="date" id="end-date" name="end-date"
+                        <input placeholder="Enter rent end date" type="date" id="end-date" name="date_fin"
                             class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
                             required />
                     </div>
@@ -254,7 +267,7 @@ while ($row = $result->fetch_assoc()) {
                 <div class="mt-6 flex justify-end space-x-2">
                     <button type="button"
                         class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 closeAddContrat">Cancel</button>
-                    <button type="submit"
+                    <button type="submit" name="submit"
                         class="px-8 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">Save</button>
                 </div>
             </form>

@@ -217,7 +217,6 @@ $conn-> close();
     </div>
 
     <!-- add new client modal -->
-    <!-- add new client modal -->
     <div id="addClient" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
         <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
 
