@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../assets/gorent.svg">
-    <script src="../scripts/script.js" defer></script>
+    <script src="../scripts/clients.js" defer></script>
 
 </head>
 
@@ -148,9 +148,10 @@
                                        <td class="py-3 px-4 border-b">'. $row["Phone"] .'</td>
                                        <td class="py-3 px-4 border-b">'. $row["Address"] .'</td>
                                        <td class="py-3 px-4 border-b text-center space-x-2">
-                                       <button class="text-blue-500 hover:text-blue-600">
+                                       <button class="text-blue-500 hover:text-blue-600 editClientBtn" >
                                         <i class="ri-edit-line text-lg"></i>
                                        </button>
+                                       
                                        <a href="../phpFunction/deleteClient.php?id='.$row["id"].'" class="btn-delete">
                                              <i class="ri-delete-bin-line text-lg text-red-500 hover:text-red-700"></i>
                                        </a>
@@ -158,11 +159,9 @@
                                    </tr>
                                     ';
                                 }
-                                 
                               ?>
                             </tbody>
                           </table>
-                          
                     </div>
                 </div>
             </div>
@@ -227,6 +226,69 @@
                 </div>
             </form>
         </div>
+    </div>    
+
+<!-- Edit client Modal  -->
+     
+<div id="editClientModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
+
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl  font-semibold text-orange-600">Edit Client</h3>
+                <button class="text-gray-500 hover:text-gray-700 closeEditClient"><i
+                        class="ri-close-circle-line text-2xl text-orange-600"></i></button>
+            </div>
+
+            <form action="../phpFunction/editClient.php" method="post">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+
+                    <div>
+                        <label for="first-name" class="mb-2 block text-sm font-medium text-gray-700">First Name</label>
+                        <input placeholder="Enter your first name" type="text" id="first-name" name="first-name"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div>
+                        <label for="last-name" class="mb-2 block text-sm font-medium text-gray-700">Last Name</label>
+                        <input placeholder="Enter your last name" type="text" id="last-name" name="last-name"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div>
+                        <label for="email" class="mb-2 block text-sm font-medium text-gray-700">Email</label>
+                        <input placeholder="Enter your email address" type="email" id="email" name="email"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div>
+                        <label for="phone" class="mb-2 block text-sm font-medium text-gray-700">Phone</label>
+                        <input placeholder="Enter your phone number" type="text" id="phone" name="phone"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <label for="address" class="mb-2 block text-sm font-medium text-gray-700">Address</label>
+                    <textarea placeholder="Enter your message" id="address" name="address" rows="3"
+                        class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                        required></textarea>
+                </div>
+
+                <div class="mt-6 flex justify-end space-x-2">
+                    <button type="button"
+                        class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 closeEditClient">Cancel</button>
+                    <button type="submit" name="submit"
+                        class="px-8 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
 </body>
 
 </html>

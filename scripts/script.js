@@ -53,3 +53,7 @@ closeAddContrat.forEach(button => {
       addContratModal.classList.add('hidden');
    });
  });
+
+// edit client modal 
+const editClientBtn = document.getElementById('editClientBtn');
+ 
