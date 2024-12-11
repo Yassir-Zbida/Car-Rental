@@ -220,7 +220,6 @@ while ($row = $result->fetch_assoc()) {
                         <select class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500" name="clientId">
                         <option value="" disabled selected >Select a Client</option>
                         <?php
-                         
                             $clients = $conn->query("SELECT id, CONCAT(First_Name, ' ',Last_Name) AS Full_Name FROM clients");
                             while ($client = $clients->fetch_assoc()) {
                                 echo "<option value='{$client['id']}'>{$client['Full_Name']}</option>";

@@ -148,9 +148,10 @@
                                        <td class="py-3 px-4 border-b">'. $row["Phone"] .'</td>
                                        <td class="py-3 px-4 border-b">'. $row["Address"] .'</td>
                                        <td class="py-3 px-4 border-b text-center space-x-2">
-                                       <button class="text-blue-500 hover:text-blue-600 editClientBtn" >
+                                       
+                                       <a href="../phpFunction/editClient.php?id='.$row["id"].'" class="text-blue-500 hover:text-blue-600 editClientBtn">
                                         <i class="ri-edit-line text-lg"></i>
-                                       </button>
+                                       </a>
                                        
                                        <a href="../phpFunction/deleteClient.php?id='.$row["id"].'" class="btn-delete">
                                              <i class="ri-delete-bin-line text-lg text-red-500 hover:text-red-700"></i>
@@ -168,7 +169,7 @@
         </section>
     </div>
 
-    <!-- add new client modal -->
+<!-- add new client modal -->
      
     <div id="addClient" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
         <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
@@ -244,28 +245,28 @@
 
                     <div>
                         <label for="first-name" class="mb-2 block text-sm font-medium text-gray-700">First Name</label>
-                        <input placeholder="Enter your first name" type="text" id="first-name" name="first-name"
+                        <input placeholder="Enter your first name" type="text" id="firstNameEdit" name="first-name"
                             class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
                             required />
                     </div>
 
                     <div>
                         <label for="last-name" class="mb-2 block text-sm font-medium text-gray-700">Last Name</label>
-                        <input placeholder="Enter your last name" type="text" id="last-name" name="last-name"
+                        <input placeholder="Enter your last name" type="text" id="lastNameEdit" name="last-name"
                             class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
                             required />
                     </div>
 
                     <div>
                         <label for="email" class="mb-2 block text-sm font-medium text-gray-700">Email</label>
-                        <input placeholder="Enter your email address" type="email" id="email" name="email"
+                        <input placeholder="Enter your email address" type="email" id="emailEdit" name="email"
                             class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
                             required />
                     </div>
 
                     <div>
                         <label for="phone" class="mb-2 block text-sm font-medium text-gray-700">Phone</label>
-                        <input placeholder="Enter your phone number" type="text" id="phone" name="phone"
+                        <input placeholder="Enter your phone number" type="text" id="phoneEdit" name="phone"
                             class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
                             required />
                     </div>
@@ -273,7 +274,7 @@
 
                 <div class="mt-4">
                     <label for="address" class="mb-2 block text-sm font-medium text-gray-700">Address</label>
-                    <textarea placeholder="Enter your message" id="address" name="address" rows="3"
+                    <textarea placeholder="Enter your message" id="address" name="addressEdit" rows="3"
                         class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
                         required></textarea>
                 </div>
@@ -286,7 +287,7 @@
                 </div>
             </form>
         </div>
-    </div>
+</div>
 
 
 </body>
