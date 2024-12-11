@@ -24,3 +24,32 @@ closeAddContrat.forEach(button => {
       addContratModal.classList.add('hidden');
    });
  });
+
+ // edit btn modal 
+ const editContractBtns = document.querySelectorAll('.editContractBtn');
+ const editContratModal = document.getElementById('editContratModal');
+ editContractBtns.forEach(button => {
+    button.addEventListener('click', () => {
+       editContratModal.classList.remove('hidden');
+    });
+ });
+
+ // close edit modal 
+ const closeEditContrat = document.querySelectorAll('.closeEditContrat');
+ closeEditContrat.forEach(button => {
+   button.addEventListener('click', () => {
+      editContratModal.classList.add('hidden');
+   });
+ });
+
+ function openEditModal(id,startDate,endDate,Total,ClientId,CarId){
+   editContratModal.classList.remove('hidden');
+   document.getElementById('carIdEdit').value = CarId ;
+   document.getElementById('totalEdit').value = Total;
+   document.getElementById('endDateEdit').value = endDate;
+   document.getElementById('startDateEdit').value = startDate ; 
+   document.getElementById('clientIdEdit').value = ClientId;  
+   const contractEdit = document.getElementById('ContractEdit');
+   contractEdit.value = id ;
+ }
+

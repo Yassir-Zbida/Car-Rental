@@ -157,7 +157,9 @@ $sql = "
         CONCAT(cars.Brand, ' ', cars.Model) AS Car_Name,  
         contracts.Start_Date,
         contracts.End_Date,
-        contracts.Total
+        contracts.Total,
+        contracts.Client_ID,
+        contracts.Car_ID
     FROM contracts
     JOIN clients ON contracts.Client_ID = clients.ID
     JOIN cars ON contracts.Car_ID = cars.ID;
@@ -172,25 +174,35 @@ if (!$result) {
 while ($row = $result->fetch_assoc()) {
     echo '
     <tr class="hover:bg-gray-50">
-        <td class="py-3 px-4 border-b">' . $row["ID"] . '</td>
-        <td class="py-3 px-4 border-b">' . $row["ClientName"] . '</td> 
-        <td class="py-3 px-4 border-b">' . $row["Car_Name"] . '</td> 
-        <td class="py-3 px-4 border-b">' . $row["Start_Date"] . '</td>
-        <td class="py-3 px-4 border-b">' . $row["End_Date"] . '</td>
-        <td class="py-3 px-4 border-b">' . $row["Total"] . '</td>
+        <td class="py-3 px-4 border-b">' . htmlspecialchars($row["ID"]) . '</td>
+        <td class="py-3 px-4 border-b">' . htmlspecialchars($row["ClientName"]) . '</td> 
+        <td class="py-3 px-4 border-b">' . htmlspecialchars($row["Car_Name"]) . '</td> 
+        <td class="py-3 px-4 border-b">' . htmlspecialchars($row["Start_Date"]) . '</td>
+        <td class="py-3 px-4 border-b">' . htmlspecialchars($row["End_Date"]) . '</td>
+        <td class="py-3 px-4 border-b">' . htmlspecialchars($row["Total"]) . '</td>
         <td class="py-3 px-4 border-b">
             <span class="bg-green-100 text-green-600 py-1 px-3 rounded-full">Active</span>
         </td>
         <td class="py-3 px-4 border-b text-center space-x-2">
-            <button class="text-blue-500 hover:text-blue-600">
+            <button 
+                class="text-blue-500 hover:text-blue-600 editContractBtn" 
+                onclick="openEditModal(
+                    ' . htmlspecialchars($row["ID"]) . ', 
+                    \'' . htmlspecialchars($row["Start_Date"]) . '\', 
+                    \'' . htmlspecialchars($row["End_Date"]) . '\', 
+                    ' . htmlspecialchars($row["Total"]) . ', 
+                    ' . htmlspecialchars($row["Client_ID"]) . ', 
+                    ' . htmlspecialchars($row["Car_ID"]) . '
+                )">
                 <i class="ri-eye-line text-lg"></i>
-            
-            <a href="../phpFunction/deleteContract.php?id='.$row["ID"].'" class="btn-delete">
-              <i class="ri-delete-bin-line text-lg text-red-500 hover:text-red-700"></i>
+            </button>
+            <a href="../phpFunction/deleteContract.php?id=' . htmlspecialchars($row["ID"]) . '" class="btn-delete">
+                <i class="ri-delete-bin-line text-lg text-red-500 hover:text-red-700"></i>
             </a>
         </td>
     </tr>';
 }
+
 
 ?>
 
@@ -266,6 +278,77 @@ while ($row = $result->fetch_assoc()) {
                 <div class="mt-6 flex justify-end space-x-2">
                     <button type="button"
                         class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 closeAddContrat">Cancel</button>
+                    <button type="submit" name="submit"
+                        class="px-8 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Contract Modal  -->
+
+    <div id="editContratModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
+
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl  font-semibold text-orange-600">Edit Contract</h3>
+                <button class="text-gray-500 hover:text-gray-700 closeEditContrat"><i
+                        class="ri-close-circle-line text-2xl text-orange-600"></i></button>
+            </div>
+
+            <form action="../phpFunction/editContract.php" method="post">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="clientId" class="mb-2 block text-sm font-medium text-gray-700" >Client ID</label> 
+                        <select class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500" name="clientIdEdit" id="clientIdEdit">
+                        <option value="" disabled selected >Select a Client</option>
+                        <?php
+                            $clients = $conn->query("SELECT id, CONCAT(First_Name, ' ',Last_Name) AS Full_Name FROM clients");
+                            while ($client = $clients->fetch_assoc()) {
+                                echo "<option value='{$client['id']}'>{$client['Full_Name']}</option>";
+                            }
+                        ?>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="carId" class="mb-2 block text-sm font-medium text-gray-700">Car ID</label>
+                        <select  name="carIdEdit" id="carIdEdit" class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500" required>
+                            <option >Select a car </option>
+                            <?php
+                                $cars = $conn->query("SELECT ID, CONCAT(Brand, ' ', Model) AS cars FROM cars ");
+                                while ($car = $cars->fetch_assoc()) {
+                                    echo "<option value='{$car['ID']}'>{$car['cars']}</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                     <input type="hidden" id="ContractEdit" name="ContractEdit">               
+                    <div>
+                        <label for="start-date" class="mb-2 block text-sm font-medium text-gray-700">Start Date</label>
+                        <input placeholder="Enter rent start date" type="date" id="startDateEdit" name="startDateEdit"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div>
+                        <label for="end-date" class="mb-2 block text-sm font-medium text-gray-700">End Date</label>
+                        <input placeholder="Enter rent end date" type="date"  name="endDateEdit" id="endDateEdit"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+
+                    <div class="col-span-2">
+                        <label for="total" class="mb-2 block text-sm font-medium text-gray-700">Total</label>
+                        <input placeholder="Enter total price" type="number" id="totalEdit" name="totalEdit"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-orange-500 focus:border-orange-500"
+                            required />
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end space-x-2">
+                    <button type="button"
+                        class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 closeEditContrat">Cancel</button>
                     <button type="submit" name="submit"
                         class="px-8 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">Save</button>
                 </div>

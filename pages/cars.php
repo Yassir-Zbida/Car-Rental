@@ -151,9 +151,9 @@
                                                 class="bg-green-100 text-green-600 py-1 px-3 rounded-full">Available</span>
                                         </td>
                                         <td class="py-3 px-4 border-b text-center space-x-2">
-                                            <button class="text-blue-500 hover:text-blue-600">
+                                            <a href="../phpFunction/editCar.php?id='.$row["ID"].'" class="text-blue-500 hover:text-blue-600">
                                                 <i class="ri-edit-line text-lg"></i>
-                                            </button>
+                                            </a>
                                             <a href="../phpFunction/deleteCar.php?id='.$row["ID"].'" class="btn-delete">
                                              <i class="ri-delete-bin-line text-lg text-red-500 hover:text-red-700"></i>
                                             </a>
