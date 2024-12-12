@@ -53,3 +53,8 @@ closeAddContrat.forEach(button => {
    contractEdit.value = id ;
  }
 
+  // print clients pdf 
+  document.getElementById('printPdf').addEventListener('click', () => {
+   window.print(); 
+ });
+

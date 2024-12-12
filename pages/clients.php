@@ -15,6 +15,15 @@
 
 <body class="bg-gray-50 text-gray-700">
 
+     <!-- Pdf file Header -->
+     <div class="flex justify-between p-6 mx-2 mt-8 pdfHeader hidden">
+         <img src="../assets/gorent-logo.svg">
+         <div>
+            <h2>Agent : Yassir ZBIDA</h2>
+            <h2>Tel   : +212 772508881</h2>
+         </div>
+     </div>
+
     <!-- main container -->
     <div class="flex flex-col lg:flex-row min-h-screen ">
         <!-- Sidebar -->
@@ -71,7 +80,7 @@
         <section class="flex-1 p-4 md:p-6 space-y-6">
             <!-- Header -->
             <header
-                class="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
+                class="header flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
                 <i class="ri-sidebar-fold-line text-2xl mt-2 text-orange-600 hover:text-gray-700 transition"
                     id="sidebarIcon"></i>
                 <h2 class="text-2xl font-bold">Clients</h2>
@@ -84,7 +93,7 @@
             </header>
 
             <!-- Header Options section-->
-            <div class="bg-white flex items-center justify-between w-full  p-4 shadow rounded-md mb-4">
+            <div class="headerOptions bg-white flex items-center justify-between w-full  p-4 shadow rounded-md mb-4">
                 <div class="w-full flex items-center justify-between space-x-4">
 
                     <div class="relative">
@@ -93,17 +102,26 @@
                         <i class="ri-search-line absolute left-3 top-2 text-gray-400"></i>
                     </div>
 
+                    <div class="flex gap-4">
                     <button
                         class="flex items-center bg-orange-600 hover:bg-transparent hover:text-orange-600 text-white px-4 py-2 rounded-lg shadow text-sm font-medium" id="addClientBtn">
                         <i class="ri-user-add-line text-lg mr-2"></i> Add Client
                     </button>
+                    <button
+                        class="flex items-center bg-orange-600 hover:bg-transparent hover:text-orange-600 text-white px-4 py-2 rounded-lg shadow text-sm font-medium" id="printPdf">
+                        <i class="ri-printer-line text-lg mr-2"></i> Print Pdf
+                    </button>
+                    </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-1 gap-6">
                 <!-- clients table -->
-                <div class=" bg-white p-6 rounded-lg shadow">
-                    <h4 class="text-lg font-bold mb-4">Go Rent Clients</h4>
+                <div class=" bg-white p-6 rounded-lg shadow clientsPlayers">
+                    <div class="flex justify-between ">
+                       <h4 class="text-lg font-bold mb-4">Go Rent Clients</h4>
+                       
+                    </div>
                     <div class="rounded-lg overflow-x-auto">
                         <table class="border w-full border-collapse text-sm text-gray-600">
                             <!-- Table Head -->
@@ -116,7 +134,7 @@
                                  <th class="py-2 px-4 border-b">Email</th>
                                  <th class="py-2 px-4 border-b">Phone</th>
                                  <th class="py-2 px-4 border-b">Address</th>
-                                 <th class="py-2 px-4 border-b text-center">Actions</th>
+                                 <th class="thActions py-2 px-4 border-b text-center">Actions</th>
                                </tr>
                              </thead>
                             
@@ -153,7 +171,7 @@
                                         <i class="ri-edit-line text-lg"></i>
                                        </a>
                                        
-                                       <a href="../phpFunction/deleteClient.php?id='.$row["id"].'" class="btn-delete">
+                                       <a href="../phpFunction/deleteClient.php?id='.$row["id"].'" class="btnDelete">
                                              <i class="ri-delete-bin-line text-lg text-red-500 hover:text-red-700"></i>
                                        </a>
                                     </td>
@@ -289,6 +307,29 @@
         </div>
 </div>
 
+<style>
+    @media print {
+        @page {
+        size: landscape;
+        }
+       #sidebar{
+        display: none;
+       }
+      .clientsPlayers * {
+        visibility: visible;
+      }
+      #editClientBtn, .btn-delete{
+        visibility: hidden;
+      }
+      .header , .headerOptions , .thActions , .editClientBtn , .btnDelete{ 
+        display: none;
+      }
+      .pdfHeader{
+        display: flex; 
+        flex-direction: row;
+      }
+    }
+</style>
 
 </body>
 

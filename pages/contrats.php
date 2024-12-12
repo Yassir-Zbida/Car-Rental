@@ -31,6 +31,15 @@ if ($conn->connect_error) {
 
 <body class="bg-gray-50 text-gray-700">
 
+<!-- Pdf file Header -->
+    <div class="flex justify-between p-6 mx-2 mt-8 pdfHeader hidden">
+         <img src="../assets/gorent-logo.svg">
+         <div>
+            <h2>Agent : Yassir ZBIDA</h2>
+            <h2>Tel   : +212 772508881</h2>
+         </div>
+     </div>
+
     <!-- main container -->
     <div class="flex flex-col lg:flex-row min-h-screen ">
         <!-- Sidebar -->
@@ -87,7 +96,7 @@ if ($conn->connect_error) {
         <section class="flex-1 p-4 md:p-6 space-y-6">
             <!-- Header -->
             <header
-                class="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
+                class="header flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
                 <i class="ri-sidebar-fold-line text-2xl mt-2 text-orange-600 hover:text-gray-700 transition"
                     id="sidebarIcon"></i>
                 <h2 class="text-2xl font-bold">Contrats</h2>
@@ -100,7 +109,7 @@ if ($conn->connect_error) {
             </header>
 
             <!-- Header Options section-->
-            <div class="bg-white flex items-center justify-between w-full  p-4 shadow rounded-md mb-4">
+            <div class="headerOptions bg-white flex items-center justify-between w-full  p-4 shadow rounded-md mb-4">
                 <div class="w-full flex items-center justify-between space-x-4">
                     <!-- Search -->
                     <div class="relative">
@@ -108,12 +117,20 @@ if ($conn->connect_error) {
                             class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-orange-200 text-sm text-gray-600" />
                         <i class="ri-search-line absolute left-3 top-2 text-gray-400"></i>
                     </div>
-                    <!-- Add Car -->
+                    <!-- Add Contract -->
+                    <div class="flex gap-4">
                     <button
                         class="transition duration-200flex items-center bg-orange-600 hover:bg-transparent hover:text-orange-600 text-white px-4 py-2 rounded-lg shadow text-sm font-medium"
                         id="addContratBtn">
                         <i class="ri-sticky-note-add-line text-lg mr-2"></i> Add Contrat
                     </button>
+                    <button id="printPdf"
+                        class="transition duration-200flex items-center bg-orange-600 hover:bg-transparent hover:text-orange-600 text-white px-4 py-2 rounded-lg shadow text-sm font-medium"
+                        id="addContratBtn">
+                        <i class="ri-printer-line text-lg mr-2"></i> Print Pdf
+                    </button>
+                    </div>
+
                 </div>
             </div>
 
@@ -133,7 +150,7 @@ if ($conn->connect_error) {
                                     <th class="py-2 px-4 border-b">End Date</th>
                                     <th class="py-2 px-4 border-b">Total</th>
                                     <th class="py-2 px-4 border-b">Status</th>
-                                    <th class="py-2 px-4 border-b text-center">Actions</th>
+                                    <th class="py-2 px-4 border-b text-center thActions">Actions</th>
                                 </tr>
                             </thead>
 
@@ -196,7 +213,7 @@ while ($row = $result->fetch_assoc()) {
                 )">
                 <i class="ri-eye-line text-lg"></i>
             </button>
-            <a href="../phpFunction/deleteContract.php?id=' . htmlspecialchars($row["ID"]) . '" class="btn-delete">
+            <a href="../phpFunction/deleteContract.php?id=' . htmlspecialchars($row["ID"]) . '" class="btnDelete">
                 <i class="ri-delete-bin-line text-lg text-red-500 hover:text-red-700"></i>
             </a>
         </td>
@@ -355,6 +372,32 @@ while ($row = $result->fetch_assoc()) {
             </form>
         </div>
     </div>
+
+
+    <style>
+    @media print {
+        
+       #sidebar{
+        display: none;
+       }
+      #editClientBtn, .btn-delete{
+        visibility: hidden;
+      }
+      .header , .thActions , .editContractBtn , .btnDelete , .header , .headerOptions{ 
+        display: none;
+      }
+      .pdfHeader{
+        display: flex; 
+        flex-direction: row;
+      }
+
+      @page {
+        size: landscape;
+        }
+     
+     
+    }
+</style>
 
 </body>
 

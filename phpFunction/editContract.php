@@ -4,8 +4,6 @@ if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
 
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $contractId = $_POST['ContractEdit'];
     $clientid = $_POST['clientIdEdit'];

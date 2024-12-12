@@ -43,4 +43,7 @@ closeEditClient.forEach(button => {
     });
   });  
  
- 
+ // print clients pdf 
+ document.getElementById('printPdf').addEventListener('click', () => {
+  window.print(); 
+});

@@ -125,7 +125,7 @@ const editClientModal = document.getElementById('editClientModal');
 
 closeEditClient.forEach(button => {
     button.addEventListener('click', () => {
-        window.location.href='../pages/clients.php';
+        window.location.href='../pages/cars.php';
     });
   }); 
 </script>

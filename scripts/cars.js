@@ -22,3 +22,8 @@ closeAddCar.forEach(button => {
    
    addCarModal.classList.remove('hidden');
 });
+
+ // print clients pdf 
+ document.getElementById('printPdf').addEventListener('click', () => {
+   window.print(); 
+ });
